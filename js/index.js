@@ -1,4 +1,5 @@
 const area = document.getElementById('area')
+const boxes = document.querySelectorAll('.box');
 let move = 0
 let winner = ''
 
@@ -18,9 +19,7 @@ area.addEventListener('click', event => {
 
 
 
-function findWinner() {
-
-	const boxes = document.querySelectorAll('.box');
+function findWinner() {	
 
 	const winArr = [
 		[0, 1, 2],
@@ -35,18 +34,26 @@ function findWinner() {
 
 	for (let i = 0; i < winArr.length; i++) {
 		if (boxes[winArr[i][0]].innerHTML.includes('cross') && boxes[winArr[i][1]].innerHTML.includes('cross') && boxes[winArr[i][2]].innerHTML.includes('cross')) {
-			winner = 'крестики'
-			alert('Победили крестики !!!')
-			boxes.forEach(item => item.innerHTML = '')
+			winner = 'крестики';
+			alert('Победили крестики !!!');
+			clearResults();
 		}
 		if (boxes[winArr[i][0]].innerHTML.includes('circle') && boxes[winArr[i][1]].innerHTML.includes('circle') && boxes[winArr[i][2]].innerHTML.includes('circle')) {
-			winner = 'нолики'
-			alert('Победили нолики !!!')
-			boxes.forEach(item => item.innerHTML = '')
-		}
+			winner = 'нолики';
+			alert('Победили нолики !!!');
+			clearResults();
+		}		
 	}
-	
+
+	if (move === 9 && winner === '') {
+		alert('Победила дружба !!!');
+		clearResults();
+	}	
 }
 
-
+function clearResults() {
+	boxes.forEach(item => item.innerHTML = '')
+			move = 0
+			winner = ''
+}
 
