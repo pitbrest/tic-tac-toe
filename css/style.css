@@ -3,6 +3,25 @@ body {
 	height: 100%;
 	margin: 0 auto;
 	position: relative;
+	color: #474a51;
+	font-family: 'Urbanist', sans-serif;
+	background-color: #d9d9d9;
+}
+body a {	
+	color: #474a51;	
+	font-weight: 900;
+}
+#audio-player {
+	display: none;
+}
+
+
+/********************/
+/****** main ******/
+/********************/
+
+main {
+	height: calc(100vh - 60px)
 }
 .container {
 	position: absolute;
@@ -24,6 +43,54 @@ body {
 	justify-content: center;
 	align-items: center;
 	border: 1px solid black;
-	background-color: #FFCB73;
+	background-color: #fdf5e7e6;
 	margin: 1px;		
+}
+
+/********************/
+/****** FOOTER ******/
+/********************/
+
+footer {
+	background-color: #fdf5e7e6;
+	font-size: 18px;
+	font-weight: 700;
+}
+.footer {
+	max-width: 1440px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 20px;
+	height: 60px;
+}
+.footer-left span:nth-child(2) {
+	padding: 0 10px;
+}
+.footer a {	
+	transition: ease-in-out 0.3s;
+}
+.footer-left a:hover {
+	color: rgb(62 111 173);
+	transition: ease-in-out 0.3s;
+}
+.footer-right img {
+	filter: invert(67%) sepia(5%) saturate(10%) hue-rotate(40deg) brightness(100%) contrast(95%);
+	transition: ease-in-out 0.3s;
+}
+.footer-right a:hover {
+	filter: invert(65%) sepia(228%) saturate(113%) hue-rotate(178deg) brightness(77%) contrast(148%);
+	transition: ease-in-out 0.3s;
+}
+@media (max-width: 480px) {
+	.footer {		
+		padding: 5px 20px;
+		height: 40px;
+	}
+	.rss-logo {
+		width: 70.7px;
+		height: 26.4px;
+	}
+
 }
