@@ -1,0 +1,29 @@
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	position: relative;
+}
+.container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-153px, -153px);
+	margin: 0 auto;
+	width: 306px;
+	height: 306px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.box {
+	width: 100px;
+	height: 100px;	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid black;
+	background-color: #FFCB73;
+	margin: 1px;		
+}
