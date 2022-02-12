@@ -46,6 +46,11 @@ main {
 	background-color: #fdf5e7e6;
 	margin: 1px;		
 }
+@media (max-width: 480px) {
+	main {
+		height: calc(100vh - 40px)
+	}
+}
 
 /********************/
 /****** FOOTER ******/
@@ -84,7 +89,8 @@ footer {
 	transition: ease-in-out 0.3s;
 }
 @media (max-width: 480px) {
-	.footer {		
+	.footer {	
+		font-size: 16px;	
 		padding: 5px 20px;
 		height: 40px;
 	}
