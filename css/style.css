@@ -12,6 +12,33 @@ body a {
 	color: #474a51;	
 	font-weight: 900;
 }
+
+/********************/
+/****** header ******/
+/********************/
+header {
+	background-color: #fdf5e7e6;	
+}
+.header-container {
+	max-width: 1440px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 auto;
+	padding: 10px 20px;
+}
+.header-left {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.header-left h1 {
+	font-weight: 900;
+	font-size: 26px;
+}
+.header-logo {
+	margin-right: 20px;
+}
 #audio-player {
 	display: none;
 }
@@ -22,7 +49,7 @@ body a {
 /********************/
 
 main {
-	height: calc(100vh - 60px);
+	height: calc(100vh - 130px);
 	position: relative;
 }
 .container {
