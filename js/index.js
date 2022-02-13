@@ -17,6 +17,12 @@ let move = 0;
 let winner = '';
 
 
+// При загрузке отображаем нужную кнопку управления звуком 
+
+buttonsPrepair()
+
+// Определяем при кликах по игровому полю когда ставить крестик, а когда 0
+
 area.addEventListener('click', event => {
 
 	if (event.target.className === 'box') {
@@ -111,10 +117,9 @@ function sound(track) {
 	})
 } */
 
-// Реализуем отключение звука по клику на кнопку, записываем в localStorage ключь volume cо значением 1 (Если такой ключь еще не создан), в зависимости от значения ключа - 0 или 1, отобращаем в футере соответствующую кнопку управления звуком,  вешаем прослушиватель кликов на кнопки.
+// Родготовка кноппок при загрузке страницы
 
-soundButtons.forEach(button => {
-
+function buttonsPrepair() {
 	if (!localStorage.volume) {
 		localStorage.setItem('volume', '1')
 		volumeOffButton.style.display = 'block';
@@ -129,6 +134,14 @@ soundButtons.forEach(button => {
 		volumeOnButton.style.display = 'none';
 		volumeOffButton.style.display = 'block';
 	}
+}
+
+
+
+// Реализуем отключение звука по клику на кнопку, записываем в localStorage ключь volume cо значением 1 (Если такой ключь еще не создан), в зависимости от значения ключа - 0 или 1, отобращаем в футере соответствующую кнопку управления звуком,  вешаем прослушиватель кликов на кнопки.
+
+
+soundButtons.forEach(button => {
 
 	button.addEventListener('click', (event) => {
 		
