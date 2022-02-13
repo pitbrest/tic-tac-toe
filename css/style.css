@@ -179,7 +179,7 @@ footer {
 	color: rgb(62 111 173);
 	transition: ease-in-out 0.3s;
 }
-.volume-on-button {
+.volume {
 	display: none;
 }
 .volume {
