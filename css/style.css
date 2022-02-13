@@ -57,7 +57,7 @@ header {
 /********************/
 
 main {
-	height: calc(100vh - 130px);
+	height: calc(100% - 130px);
 	position: relative;
 }
 .container {
@@ -147,7 +147,7 @@ main {
 
 @media (max-width: 480px) {
 	main {
-		height: calc(100vh - 85px)
+		height: calc(100% - 85px)
 	}
 }
 
