@@ -99,12 +99,10 @@ body.addEventListener('click', (event) => {
 // Добавляем озвучку
 
 function sound(track) {
-	if (localStorage.volume) {
-		audio.volume = localStorage.getItem('volume')
-	}
-	audio.currentTime = 0;
-	audio.src = track;
-	audio.play();
+	if (localStorage.volume === 'play') {		
+		audio.src = track;
+		audio.play();
+	}	
 }
 
 // Озвучка если пользователь кликает мимо игрового поля
@@ -121,12 +119,12 @@ function sound(track) {
 
 function buttonsPrepair() {
 	if (!localStorage.volume) {
-		localStorage.setItem('volume', '1');
+		localStorage.setItem('volume', 'play');
 	}
-	if (localStorage.getItem('volume') === '0') {
+	if (localStorage.getItem('volume') === 'pause') {
 		volumeOnButton.style.display = 'block';
 		volumeOffButton.style.display = 'none';
-	} else if (localStorage.getItem('volume') === '1') {
+	} else if (localStorage.getItem('volume') === 'play') {
 		volumeOnButton.style.display = 'none';
 		volumeOffButton.style.display = 'block';
 	}
@@ -144,13 +142,13 @@ soundButtons.forEach(button => {
 		if (event.target.className.includes('volume-on-button')) {
 			event.target.style.display = 'none';
 			volumeOffButton.style.display = 'block';
-			audio.volume = 1;
-			localStorage.volume = '1';
+			audio.play();
+			localStorage.volume = 'play';
 		} else if (event.target.className.includes('volume-off-button')) {
 			event.target.style.display = 'none';
 			volumeOnButton.style.display = 'block';
-			audio.volume = 0;			
-			localStorage.volume = '0';
+			audio.pause();
+			localStorage.volume = 'pause';
 		}
 	})
 })
