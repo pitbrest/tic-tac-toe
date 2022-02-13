@@ -146,12 +146,10 @@ soundButtons.forEach(button => {
 			volumeOffButton.style.display = 'block';
 			audio.volume = 1;
 			localStorage.volume = '1';
-		}
-		if (event.target.className.includes('volume-off-button')) {
+		} else if (event.target.className.includes('volume-off-button')) {
 			event.target.style.display = 'none';
 			volumeOnButton.style.display = 'block';
-			audio.volume = 0;
-			audio.pause()
+			audio.volume = 0;			
 			localStorage.volume = '0';
 		}
 	})
