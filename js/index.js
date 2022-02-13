@@ -44,15 +44,13 @@ function findWinner() {
 	];
 
 	for (let i = 0; i < winArr.length; i++) {
-		if (boxes[winArr[i][0]].innerHTML.includes('cross') && boxes[winArr[i][1]].innerHTML.includes('cross') && boxes[winArr[i][2]].innerHTML.includes('cross')) {
-			sound(trackTwo)
+		if (boxes[winArr[i][0]].innerHTML.includes('cross') && boxes[winArr[i][1]].innerHTML.includes('cross') && boxes[winArr[i][2]].innerHTML.includes('cross')) {			
 			winner = "assets/svg/cross.svg";
 			movesCountContainer.textContent = move
 			greeting(winner)
 			clearResults();
 		}
-		if (boxes[winArr[i][0]].innerHTML.includes('circle') && boxes[winArr[i][1]].innerHTML.includes('circle') && boxes[winArr[i][2]].innerHTML.includes('circle')) {
-			sound(trackTwo)
+		if (boxes[winArr[i][0]].innerHTML.includes('circle') && boxes[winArr[i][1]].innerHTML.includes('circle') && boxes[winArr[i][2]].innerHTML.includes('circle')) {			
 			winner = "assets/svg/circle.svg";
 			movesCountContainer.textContent = move
 			greeting(winner)
@@ -74,8 +72,23 @@ function clearResults() {
 	winner = '';
 }
 
-// Добавляем озвучку
+// Вызываем модальное окно при окончании игры
 
+function greeting(winner) {
+	winnerImg.src = winner;
+	winModalWindow.classList.remove('hidden');
+	sound(trackTwo)
+}
+
+// Скрываем модальное окно при клике по кнопке или оверлею
+
+body.addEventListener('click', (event) => {
+	if (event.target.className === 'overlay' || event.target.className === 'button') {
+		winModalWindow.classList.add('hidden');
+	}
+})
+
+// Добавляем озвучку
 
 function sound(track) {
 	audio.volume = localStorage.getItem('volume')
@@ -94,20 +107,7 @@ function sound(track) {
 	})
 } */
 
-// Вызываем модальное окно при окончании игры
 
-function greeting(winner) {
-	winnerImg.src = winner;
-	winModalWindow.classList.remove('hidden');
-}
-
-// Скрываем модальное окно при клике по кнопке или оверлею
-
-body.addEventListener('click', (event) => {
-	if (event.target.className === 'overlay' || event.target.className === 'button') {
-		winModalWindow.classList.add('hidden');
-	}
-})
 
 // Реализуем отключение звука по клику на кнопку, записываем в localStorage ключь volume cо значением 1 (Если такой ключь еще не создан), в зависимости от значения ключа - 0 или 1, отобращаем в футере соответствующую кнопку управления звуком,  вешаем прослушиватель кликов на кнопки.
 
@@ -119,6 +119,10 @@ soundButtons.forEach(button => {
 	if(localStorage.getItem('volume') === '0') {
 		volumeOnButton.style.display = 'block';
 		volumeOffButton.style.display = 'none';
+	}
+	if(localStorage.getItem('volume') === '1') {
+		volumeOnButton.style.display = 'none';
+		volumeOffButton.style.display = 'block';
 	}
 
 	button.addEventListener('click', (event) => {

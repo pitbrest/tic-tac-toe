@@ -34,7 +34,7 @@ header {
 }
 .header-left h1 {
 	font-weight: 900;
-	font-size: 26px;
+	font-size: calc(18px + 8 * ((100vw - 320px) / (1880 - 320)));	
 }
 .header-logo {
 	margin-right: 20px;
@@ -42,7 +42,15 @@ header {
 #audio-player {
 	display: none;
 }
-
+@media (max-width: 480px) {
+	.header-container {		
+		padding: 5px 10px;
+	}
+	.header-logo {
+		width: 35px;
+		height: 35px;
+	}
+}
 
 /********************/
 /****** main ******/
@@ -139,7 +147,7 @@ main {
 
 @media (max-width: 480px) {
 	main {
-		height: calc(100vh - 40px)
+		height: calc(100vh - 85px)
 	}
 }
 
