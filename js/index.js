@@ -117,6 +117,8 @@ soundButtons.forEach(button => {
 
 	if (!localStorage.volume) {
 		localStorage.setItem('volume', '1')
+		volumeOffButton.style.display = 'block';
+		volumeOnButton.style.display = 'none';
 	}
 
 	if (localStorage.getItem('volume') === '0') {
@@ -134,14 +136,14 @@ soundButtons.forEach(button => {
 			event.target.style.display = 'none';
 			volumeOffButton.style.display = 'block';
 			audio.volume = 1;
-			localStorage.volume = 1;
+			localStorage.volume = '1';
 		}
 		if (event.target.className.includes('volume-off-button')) {
 			event.target.style.display = 'none';
 			volumeOnButton.style.display = 'block';
 			audio.volume = 0;
 			audio.pause()
-			localStorage.volume = 0;
+			localStorage.volume = '0';
 		}
 	})
 })
