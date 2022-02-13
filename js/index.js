@@ -44,13 +44,13 @@ function findWinner() {
 	];
 
 	for (let i = 0; i < winArr.length; i++) {
-		if (boxes[winArr[i][0]].innerHTML.includes('cross') && boxes[winArr[i][1]].innerHTML.includes('cross') && boxes[winArr[i][2]].innerHTML.includes('cross')) {			
+		if (boxes[winArr[i][0]].innerHTML.includes('cross') && boxes[winArr[i][1]].innerHTML.includes('cross') && boxes[winArr[i][2]].innerHTML.includes('cross')) {
 			winner = "assets/svg/cross.svg";
 			movesCountContainer.textContent = move
 			greeting(winner)
 			clearResults();
 		}
-		if (boxes[winArr[i][0]].innerHTML.includes('circle') && boxes[winArr[i][1]].innerHTML.includes('circle') && boxes[winArr[i][2]].innerHTML.includes('circle')) {			
+		if (boxes[winArr[i][0]].innerHTML.includes('circle') && boxes[winArr[i][1]].innerHTML.includes('circle') && boxes[winArr[i][2]].innerHTML.includes('circle')) {
 			winner = "assets/svg/circle.svg";
 			movesCountContainer.textContent = move
 			greeting(winner)
@@ -59,8 +59,10 @@ function findWinner() {
 	}
 
 	if (move === 9 && winner === '') {
-		alert('Победила дружба !!!');
-		clearResults();
+		winner = "assets/png/handshake.png";
+		movesCountContainer.textContent = move
+		greeting(winner)
+		clearResults();		
 	}
 }
 
@@ -92,7 +94,7 @@ body.addEventListener('click', (event) => {
 
 function sound(track) {
 	audio.volume = localStorage.getItem('volume')
-	audio.currentTime = 0;	
+	audio.currentTime = 0;
 	audio.src = track;
 	audio.play();
 }
@@ -107,20 +109,19 @@ function sound(track) {
 	})
 } */
 
-
-
 // Реализуем отключение звука по клику на кнопку, записываем в localStorage ключь volume cо значением 1 (Если такой ключь еще не создан), в зависимости от значения ключа - 0 или 1, отобращаем в футере соответствующую кнопку управления звуком,  вешаем прослушиватель кликов на кнопки.
 
-soundButtons.forEach(button => {	
-	if(!localStorage.volume) {
-		localStorage.setItem('volume', '1')	
+soundButtons.forEach(button => {
+
+	if (!localStorage.volume) {
+		localStorage.setItem('volume', '1')
 	}
 
-	if(localStorage.getItem('volume') === '0') {
+	if (localStorage.getItem('volume') === '0') {
 		volumeOnButton.style.display = 'block';
 		volumeOffButton.style.display = 'none';
 	}
-	if(localStorage.getItem('volume') === '1') {
+	if (localStorage.getItem('volume') === '1') {
 		volumeOnButton.style.display = 'none';
 		volumeOffButton.style.display = 'block';
 	}
@@ -136,7 +137,7 @@ soundButtons.forEach(button => {
 		if (event.target.className.includes('volume-off-button')) {
 			event.target.style.display = 'none';
 			volumeOnButton.style.display = 'block';
-			audio.volume = 0; 
+			audio.volume = 0;
 			localStorage.volume = 0;
 		}
 	})
