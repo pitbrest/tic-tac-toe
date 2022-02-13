@@ -93,7 +93,9 @@ body.addEventListener('click', (event) => {
 // Добавляем озвучку
 
 function sound(track) {
-	audio.volume = localStorage.getItem('volume')
+	if (localStorage.volume) {
+		audio.volume = localStorage.getItem('volume')
+	} 	
 	audio.currentTime = 0;
 	audio.src = track;
 	audio.play();
@@ -138,6 +140,7 @@ soundButtons.forEach(button => {
 			event.target.style.display = 'none';
 			volumeOnButton.style.display = 'block';
 			audio.volume = 0;
+			audio.pause()
 			localStorage.volume = 0;
 		}
 	})
