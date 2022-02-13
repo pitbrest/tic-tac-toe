@@ -68,7 +68,7 @@ function findWinner() {
 		winner = "assets/png/handshake.png";
 		movesCountContainer.textContent = move
 		greeting(winner)
-		clearResults();		
+		clearResults();
 	}
 }
 
@@ -101,7 +101,7 @@ body.addEventListener('click', (event) => {
 function sound(track) {
 	if (localStorage.volume) {
 		audio.volume = localStorage.getItem('volume')
-	} 	
+	}
 	audio.currentTime = 0;
 	audio.src = track;
 	audio.play();
@@ -117,20 +117,16 @@ function sound(track) {
 	})
 } */
 
-// Родготовка кноппок при загрузке страницы
+// Подготовка кноппок при загрузке страницы
 
 function buttonsPrepair() {
 	if (!localStorage.volume) {
-		localStorage.setItem('volume', '1')
-		volumeOffButton.style.display = 'block';
-		volumeOnButton.style.display = 'none';
+		localStorage.setItem('volume', '1');
 	}
-
 	if (localStorage.getItem('volume') === '0') {
 		volumeOnButton.style.display = 'block';
 		volumeOffButton.style.display = 'none';
-	}
-	if (localStorage.getItem('volume') === '1') {
+	} else if (localStorage.getItem('volume') === '1') {
 		volumeOnButton.style.display = 'none';
 		volumeOffButton.style.display = 'block';
 	}
@@ -144,7 +140,7 @@ function buttonsPrepair() {
 soundButtons.forEach(button => {
 
 	button.addEventListener('click', (event) => {
-		
+
 		if (event.target.className.includes('volume-on-button')) {
 			event.target.style.display = 'none';
 			volumeOffButton.style.display = 'block';
