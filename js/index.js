@@ -118,7 +118,7 @@ function sound(track) {
 // Подготовка кноппок при загрузке страницы
 
 function buttonsPrepair() {
-	if (!localStorage.volume) {
+	if (!localStorage.volume || localStorage.volume === '1' || localStorage.volume === '0') {
 		localStorage.setItem('volume', 'play');
 	}
 	if (localStorage.getItem('volume') === 'pause') {
