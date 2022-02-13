@@ -127,7 +127,7 @@ soundButtons.forEach(button => {
 	}
 
 	button.addEventListener('click', (event) => {
-		console.log('click');
+		
 		if (event.target.className.includes('volume-on-button')) {
 			event.target.style.display = 'none';
 			volumeOffButton.style.display = 'block';
