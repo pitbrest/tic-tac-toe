@@ -1,9 +1,20 @@
 // Описываем алгоритм игры
-const body = document.body
-let area = document.getElementById('area')
-let boxes = document.querySelectorAll('.box');
-let move = 0
-let winner = ''
+const body = document.body;
+const winModalWindow = document.querySelector('.modal-result-wrapper');
+const winnerImg = document.querySelector('.winner-img');
+const newGameButton = document.querySelector('.button');
+const area = document.getElementById('area');
+const boxes = document.querySelectorAll('.box');
+const audioPlayer = document.getElementById('audio-player');
+const audio = new Audio;
+const trackOne = 'assets/sound/ti-chto.mp3';
+const trackTwo = 'assets/sound/fanfari.mp3';
+const movesCountContainer = document.querySelector('.moves-count');
+const soundButtons = document.querySelectorAll('.volume');
+const volumeOnButton = document.querySelector('.volume-on-button');
+const volumeOffButton = document.querySelector('.volume-off-button');
+let move = 0;
+let winner = '';
 
 
 area.addEventListener('click', event => {
@@ -15,7 +26,6 @@ area.addEventListener('click', event => {
 			findWinner()
 		}, 100);
 	}
-
 })
 
 // Находим победителя
@@ -36,14 +46,16 @@ function findWinner() {
 	for (let i = 0; i < winArr.length; i++) {
 		if (boxes[winArr[i][0]].innerHTML.includes('cross') && boxes[winArr[i][1]].innerHTML.includes('cross') && boxes[winArr[i][2]].innerHTML.includes('cross')) {
 			sound(trackTwo)
-			winner = 'крестики';
-			alert('Победили крестики !!!');
+			winner = "assets/svg/cross.svg";
+			movesCountContainer.textContent = move
+			greeting(winner)
 			clearResults();
 		}
 		if (boxes[winArr[i][0]].innerHTML.includes('circle') && boxes[winArr[i][1]].innerHTML.includes('circle') && boxes[winArr[i][2]].innerHTML.includes('circle')) {
 			sound(trackTwo)
-			winner = 'крестики';
-			alert('Победили нолики !!!');
+			winner = "assets/svg/circle.svg";
+			movesCountContainer.textContent = move
+			greeting(winner)
 			clearResults();
 		}
 	}
@@ -54,31 +66,75 @@ function findWinner() {
 	}
 }
 
+// Функция сброса результатов - сбрасывает количества ходов и победителя
+
 function clearResults() {
-	boxes.forEach(item => item.innerHTML = '')
-	move = 0
-	winner = ''
+	boxes.forEach(item => item.innerHTML = '');
+	move = 0;
+	winner = '';
 }
 
 // Добавляем озвучку
 
-let trackOne = 'assets/sound/ti-chto.mp3'
-let trackTwo = 'assets/sound/fanfari.mp3'
 
 function sound(track) {
-
-	const audioPlayer = document.getElementById('audio-player')
-	const audio = new Audio
-
-	audio.currentTime = 0
-	audio.src = track
-	audio.play()
+	audio.volume = localStorage.getItem('volume')
+	audio.currentTime = 0;	
+	audio.src = track;
+	audio.play();
 }
 
 // Озвучка если пользователь кликает мимо игрового поля
 
-body.addEventListener('click', event => {
-	if (event.target.className != 'box') {
-		sound(trackOne)
+/* if(winModalWindow.classList.contains('hidden')) {
+	body.addEventListener('click', event => {
+		if (event.target.className != 'box') {
+			sound(trackOne)
+		}
+	})
+} */
+
+// Вызываем модальное окно при окончании игры
+
+function greeting(winner) {
+	winnerImg.src = winner;
+	winModalWindow.classList.remove('hidden');
+}
+
+// Скрываем модальное окно при клике по кнопке или оверлею
+
+body.addEventListener('click', (event) => {
+	if (event.target.className === 'overlay' || event.target.className === 'button') {
+		winModalWindow.classList.add('hidden');
 	}
 })
+
+// Реализуем отключение звука по клику на кнопку, записываем в localStorage ключь volume cо значением 1 (Если такой ключь еще не создан), в зависимости от значения ключа - 0 или 1, отобращаем в футере соответствующую кнопку управления звуком,  вешаем прослушиватель кликов на кнопки.
+
+soundButtons.forEach(button => {	
+	if(!localStorage.volume) {
+		localStorage.setItem('volume', '1')	
+	}
+
+	if(localStorage.getItem('volume') === '0') {
+		volumeOnButton.style.display = 'block';
+		volumeOffButton.style.display = 'none';
+	}
+
+	button.addEventListener('click', (event) => {
+		console.log('click');
+		if (event.target.className.includes('volume-on-button')) {
+			event.target.style.display = 'none';
+			volumeOffButton.style.display = 'block';
+			audio.volume = 1;
+			localStorage.volume = 1;
+		}
+		if (event.target.className.includes('volume-off-button')) {
+			event.target.style.display = 'none';
+			volumeOnButton.style.display = 'block';
+			audio.volume = 0; 
+			localStorage.volume = 0;
+		}
+	})
+})
+

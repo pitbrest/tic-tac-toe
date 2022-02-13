@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="favicon.png" type="image/x-icon">
 	<link rel="stylesheet" href="css/clear.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +17,7 @@
 
 <body>
 	<header>
-		<audio id="audio-player" ></audio>
+		<audio id="audio-player"></audio>
 	</header>
 	<main>
 		<div class="container" id="area">
@@ -30,11 +31,28 @@
 			<div class="box"></div>
 			<div class="box"></div>
 		</div>
+		<div class="modal-result-wrapper hidden">
+			<div class="overlay"></div>
+			<div class="modal">
+				<div class="modal-content">
+					<p class="grac">Сongratulations !!!</p>
+					<p class="winner">the winner is<img class="winner-img" src="" alt="winners-img"></p>
+					<p class="winner">moves count is<span class="moves-count"></span></p>
+				</div>
+				<div class="button">Tub to play next</div>
+			</div>
+		</div>
 	</main>
 	<footer>
 		<section class="footer">
 			<div class="footer-left">
 				<span>&copy;</span><span>2022</span><a href="https://github.com/pitbrest" target="_blank">pitbrest</a>
+			</div>
+			<div class="footer-middle">
+				<img class="volume-on-button volume" src="assets/svg/volume.svg" alt="volume-on-image" width="30"
+					height="30">
+				<img class="volume-off-button volume" src="assets/svg/volume-off.svg" alt="volume-off-image" width="30"
+					height="30">
 			</div>
 			<div class="footer-right">
 				<a href="https://rs.school/js-stage0/" target="_blank"><img src="assets/svg/rss.svg" class="rss-logo"
