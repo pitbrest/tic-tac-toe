@@ -1,4 +1,5 @@
 // Описываем алгоритм игры
+
 const body = document.body;
 const winModalWindow = document.querySelector('.modal-result-wrapper');
 const winnerImg = document.querySelector('.winner-img');
@@ -15,6 +16,7 @@ const volumeOnButton = document.querySelector('.volume-on-button');
 const volumeOffButton = document.querySelector('.volume-off-button');
 let move = 0;
 let winner = '';
+let arr = []
 
 
 // При загрузке отображаем нужную кнопку управления звуком 
@@ -49,26 +51,44 @@ function findWinner() {
 		[2, 4, 6],
 	];
 
+
 	for (let i = 0; i < winArr.length; i++) {
 		if (boxes[winArr[i][0]].innerHTML.includes('cross') && boxes[winArr[i][1]].innerHTML.includes('cross') && boxes[winArr[i][2]].innerHTML.includes('cross')) {
 			winner = "assets/svg/cross.svg";
+			arr.push('X');
+			console.log(arr);
+			if (arr.length === 11) {
+				arr.shift();
+			}
 			movesCountContainer.textContent = move
-			greeting(winner)
+			greeting(winner);
 			clearResults();
+			scoreFill()
 		}
 		if (boxes[winArr[i][0]].innerHTML.includes('circle') && boxes[winArr[i][1]].innerHTML.includes('circle') && boxes[winArr[i][2]].innerHTML.includes('circle')) {
 			winner = "assets/svg/circle.svg";
+			arr.push('O');
+			console.log(arr);
+			if (arr.length === 11) {
+				arr.shift();
+			}
 			movesCountContainer.textContent = move
 			greeting(winner)
 			clearResults();
+			scoreFill()
 		}
 	}
 
 	if (move === 9 && winner === '') {
 		winner = "assets/png/handshake.png";
-		movesCountContainer.textContent = move
-		greeting(winner)
+		arr.push('=');
+		if (arr.length === 11) {
+			arr.shift();
+		}
+		movesCountContainer.textContent = move;
+		greeting(winner);
 		clearResults();
+		scoreFill()
 	}
 }
 
@@ -99,10 +119,10 @@ body.addEventListener('click', (event) => {
 // Добавляем озвучку
 
 function sound(track) {
-	if (localStorage.volume === 'play') {		
+	if (localStorage.volume === 'play') {
 		audio.src = track;
 		audio.play();
-	}	
+	}
 }
 
 // Озвучка если пользователь кликает мимо игрового поля
@@ -130,10 +150,7 @@ function buttonsPrepair() {
 	}
 }
 
-
-
-// Реализуем отключение звука по клику на кнопку, записываем в localStorage ключь volume cо значением 1 (Если такой ключь еще не создан), в зависимости от значения ключа - 0 или 1, отобращаем в футере соответствующую кнопку управления звуком,  вешаем прослушиватель кликов на кнопки.
-
+// Реализуем отключение звука по клику на соответствующую кнопку, записываем в localStorage ключь volume cо значением play/pause, отобращаем в футере соответствующую кнопку управления звуком,  вешаем прослушиватель кликов на кнопки.
 
 soundButtons.forEach(button => {
 
@@ -152,4 +169,24 @@ soundButtons.forEach(button => {
 		}
 	})
 })
+
+
+// Заполняем таблицу счета
+
+const scoreButton = document.querySelector('.score-button');
+const score = document.querySelector('.score');
+const scoreCells = document.querySelectorAll('td')
+
+scoreButton.addEventListener('click', (event) => score.classList.toggle('active'))
+
+function scoreFill() {
+	for (let i = 12; i < 12 + arr.length; i++) {
+
+		if (arr[i] != '') {
+			scoreCells[i].innerHTML = arr[i-12]
+		} else {
+			scoreCells[i].innerHTML = ''
+		}
+	}
+}
 
