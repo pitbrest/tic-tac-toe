@@ -55,20 +55,20 @@ function findWinner() {
 	for (let i = 0; i < winArr.length; i++) {
 		if (boxes[winArr[i][0]].innerHTML.includes('cross') && boxes[winArr[i][1]].innerHTML.includes('cross') && boxes[winArr[i][2]].innerHTML.includes('cross')) {
 			winner = "assets/svg/cross.svg";
-			arr.push('X');
-			console.log(arr);
+			arr.push('<img src="assets/svg/cross.svg" alt="" width="10" height="10">');
 			if (arr.length === 11) {
 				arr.shift();
 			}
 			movesCountContainer.textContent = move
 			greeting(winner);
 			clearResults();
-			scoreFill()
+			scoreFill();
+			records(arr)
+			recordsFill()
 		}
 		if (boxes[winArr[i][0]].innerHTML.includes('circle') && boxes[winArr[i][1]].innerHTML.includes('circle') && boxes[winArr[i][2]].innerHTML.includes('circle')) {
 			winner = "assets/svg/circle.svg";
-			arr.push('O');
-			console.log(arr);
+			arr.push('<img src="assets/svg/circle.svg" alt="" width="15" height="15">');
 			if (arr.length === 11) {
 				arr.shift();
 			}
@@ -76,12 +76,14 @@ function findWinner() {
 			greeting(winner)
 			clearResults();
 			scoreFill()
+			records(arr)
+			recordsFill()
 		}
 	}
 
 	if (move === 9 && winner === '') {
 		winner = "assets/png/handshake.png";
-		arr.push('=');
+		arr.push('<img src="assets/png/handshake.png" alt="" width="15" height="15">');
 		if (arr.length === 11) {
 			arr.shift();
 		}
@@ -89,6 +91,8 @@ function findWinner() {
 		greeting(winner);
 		clearResults();
 		scoreFill()
+		records(arr)
+		recordsFill()
 	}
 }
 
@@ -170,23 +174,67 @@ soundButtons.forEach(button => {
 	})
 })
 
-
 // Заполняем таблицу счета
 
-const scoreButton = document.querySelector('.score-button');
+const scoreButton = document.querySelector('.scores');
 const score = document.querySelector('.score');
-const scoreCells = document.querySelectorAll('td')
+const scoreCells = document.querySelectorAll('.score td');
 
-scoreButton.addEventListener('click', (event) => score.classList.toggle('active'))
+scoreButton.addEventListener('click', (event) => {
+	if (record.classList.contains('active')) {
+		record.classList.remove("active")
+	}
+	score.classList.toggle('active');
+})
 
 function scoreFill() {
 	for (let i = 12; i < 12 + arr.length; i++) {
 
 		if (arr[i] != '') {
-			scoreCells[i].innerHTML = arr[i-12]
+			scoreCells[i].innerHTML = arr[i - 12];
 		} else {
-			scoreCells[i].innerHTML = ''
+			scoreCells[i].innerHTML = '';
 		}
 	}
 }
 
+//  Заполняем статистику последних 10 игр (Records)
+
+const recordsButton = document.querySelector('.records');
+const record = document.querySelector('.record');
+const recordCells = document.querySelectorAll('.record td');
+
+recordsButton.addEventListener('click', (event) => {
+	if (score.classList.contains('active')) {
+		score.classList.remove("active")
+	}
+	record.classList.toggle('active')
+}) 
+
+// Записываем значения из массива результатов arr в localStorage
+
+function records(arr) {
+	if (!localStorage.score) {
+		localStorage.setItem('score', '')
+	}
+	let rec = JSON.stringify(arr)
+	localStorage.setItem('score', rec);
+}
+
+
+
+function recordsFill() {
+
+	let sup = JSON.parse(localStorage.score)
+
+	for (let i = 12; i < 12 + sup.length; i++) {
+
+		if (sup[i] != '') {
+			recordCells[i].innerHTML = sup[i - 12];
+		} else {
+			recordCells[i].innerHTML = '';
+		}
+	}
+}  
+
+recordsFill()
