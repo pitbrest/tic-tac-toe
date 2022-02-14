@@ -97,7 +97,7 @@ td, th {
 		transition: all ease-in-out 0.3s;	
 		z-index: 100;
 	}
-	.score.active {		
+	.score.active, .record.active {		
 		top: 50px;
 		right: calc(50% - 133px);		
 	}	
