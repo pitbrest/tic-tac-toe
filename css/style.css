@@ -81,7 +81,7 @@ td, th {
 }
 @media (max-width: 480px) {
 	.header-container {		
-		padding: 5px 5px;
+		padding: 5px 10px;
 		top: 55%;
 	}
 	.header-logo {
