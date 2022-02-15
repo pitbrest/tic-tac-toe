@@ -93,14 +93,14 @@ td, th {
 	.score, .record {
 		position: absolute;	
 		top: -100px;
-		right: calc(50% - 133px);
+		right: calc(50% - 148px);
 		background-color: #fff;
 		transition: all ease-in-out 0.3s;	
 		z-index: 100;
 	}
 	.score.active, .record.active {		
 		top: 50px;
-		right: calc(50% - 133px);		
+		right: calc(50% - 148px);		
 	}	
 	td, th {		
 		padding: 3px 5px;		
