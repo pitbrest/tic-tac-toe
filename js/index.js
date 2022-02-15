@@ -57,7 +57,7 @@ function findWinner() {
 			winner = "assets/svg/cross.svg";
 			records();
 			recordsFill();
-			arr.push('<img src="assets/svg/cross.svg" alt="#" width="10" height="10">');
+			arr.push('<img src="assets/svg/cross.svg" alt="#" width="15" height="15">');
 			if (arr.length === 11) {
 				arr.shift();
 			}
@@ -221,7 +221,7 @@ function records() {
 		localStorage.score = JSON.stringify(supArr);
 	}
 	let supTwoArr = JSON.parse(localStorage.score);
-	supTwoArr.push('<img src=' + winner + ' ' + 'alt="#" width="10" height="10">')
+	supTwoArr.push('<img src=' + winner + ' ' + 'alt="#" width="15" height="15">')
 
 	localStorage.score = JSON.stringify(supTwoArr)
 }
