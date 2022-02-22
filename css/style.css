@@ -198,7 +198,8 @@ main {
 	height: 40px;
 	text-align: center;
 	line-height: 40px;
-	background-color: rgb(219 201 167);		
+	background-color: rgb(219 201 167);
+	cursor: pointer;		
 }
 
 @media (max-width: 480px) {

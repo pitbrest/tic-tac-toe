@@ -221,9 +221,11 @@ function records() {
 		localStorage.score = JSON.stringify(supArr);
 	}
 	let supTwoArr = JSON.parse(localStorage.score);
-	if(supTwoArr.length < 10) {
+	if (supTwoArr.length >= 10) {
+		while(supTwoArr.length >= 10) supTwoArr.shift();
+	} 
 	supTwoArr.push('<img src=' + winner + ' ' + 'alt="#" width="15" height="15">')
-	}
+	
 	localStorage.score = JSON.stringify(supTwoArr)
 }
 
