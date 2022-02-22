@@ -100,7 +100,7 @@ td, th {
 	}
 	.score.active, .record.active {		
 		top: 50px;
-		right: calc(50% - 148px);		
+		right: calc(50% - 165px);		
 	}	
 	td, th {		
 		padding: 3px 5px;		
@@ -205,6 +205,9 @@ main {
 @media (max-width: 480px) {
 	main {
 		height: calc(100% - 85px)
+	}
+	table {
+		transform: scale(0.9);
 	}
 }
 
